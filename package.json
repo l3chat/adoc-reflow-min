@@ -1,0 +1,60 @@
+{
+  "name": "adoc-reflow-min",
+  "displayName": "AsciiDoc Reflow (Minimal)",
+  "description": "Reflow paragraphs in .adoc files (no build step).",
+  "version": "0.0.2",
+  "publisher": "local",
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": [
+    "Formatting"
+  ],
+  "activationEvents": [
+    "onLanguage:asciidoc",
+    "onCommand:adocReflow.reflowSelection",
+    "onCommand:adocReflow.reflowDocument"
+  ],
+  "main": "./extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "adocReflow.reflowSelection",
+        "title": "AsciiDoc: Reflow Selection/Paragraph"
+      },
+      {
+        "command": "adocReflow.reflowDocument",
+        "title": "AsciiDoc: Reflow Entire Document"
+      }
+    ],
+    "configuration": {
+      "title": "AsciiDoc Reflow (Minimal)",
+      "properties": {
+        "adocReflow.wrapColumn": {
+          "type": "number",
+          "default": 80,
+          "minimum": 20,
+          "maximum": 200,
+          "description": "Target column for reflow."
+        }
+      }
+    },
+    "keybindings": [
+      {
+        "command": "adocReflow.reflowSelection",
+        "key": "ctrl+alt+r",
+        "when": "editorTextFocus && editorLangId == asciidoc"
+      }
+    ]
+  },
+  "contributors": [
+    "GPT-5 Thinking (assistant/co-authoring support)"
+  ],
+  "scripts": {
+    "test": "node --test test/formatter.test.js",
+    "corpus:update": "node tools/update-corpus.js",
+    "test:corpus": "node test/corpus.test.js",
+    "test:all": "npm run test && npm run test:corpus",
+    "lint": "node -e \"console.log('No linter configured')\""
+  }
+}

@@ -1,0 +1,1 @@
+* This is a long list item that must wrap with a proper hanging indent under the bullet marker.

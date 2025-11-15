@@ -1,0 +1,1 @@
+* [ ] A todo that should wrap with a hanging indent after the checklist marker and be readable.

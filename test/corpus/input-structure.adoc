@@ -1,0 +1,15 @@
+[[id,Ref]]
+ifdef::env-doc[]
+include::path/to/file.adoc[leveloffset=+1]
+image::img.png[Alt]
+indexterm:[Term]
+toc::[]
+
+.Block Title
+[quote, Author]
+Paragraph follows and must not merge upward.
+
+Before
+'''
+<<<
+After

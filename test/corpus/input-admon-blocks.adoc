@@ -1,0 +1,4 @@
+[NOTE]
+====
+This is a block admonition and should be kept as-is.
+====

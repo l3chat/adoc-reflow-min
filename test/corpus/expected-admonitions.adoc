@@ -1,0 +1,2 @@
+NOTE: This is a long admonition message that should wrap with a hanging
+      indent and preserve the label.

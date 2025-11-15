@@ -1,0 +1,131 @@
+
+> adoc-reflow-min@0.0.2 test:all
+> npm run test && npm run test:corpus
+
+
+> adoc-reflow-min@0.0.2 test
+> node --test test/formatter.test.js
+
+▶ Paragraphs
+  ✔ basic reflow, words preserved (2.8337ms)
+  ✔ hard line breaks (trailing " +") preserved (0.425ms)
+  ✔ URLs not split (0.2675ms)
+  ✔ literal paragraph (leading space) preserved (0.2118ms)
+✔ Paragraphs (4.7377ms)
+▶ Lists
+  ✔ simple bullet item with hanging indent (0.5632ms)
+  ✔ definition list with hanging indent (0.2716ms)
+  ✔ nested list kept as-is (complex) (0.1414ms)
+  ✔ continuation marker + keeps attached block as-is (0.2862ms)
+  ✔ checklist items format with hanging indent (0.3396ms)
+✔ Lists (1.931ms)
+▶ Admonitions
+  ✔ single-line admonition wraps with hanging indent (0.2642ms)
+  ✔ block admonition [NOTE] + ==== fences kept (1.1748ms)
+✔ Admonitions (1.6884ms)
+▶ Blocks & fences
+  ✔ [source,lang] + ---- code block preserved (0.6983ms)
+  ✔ table fences |=== kept (0.6069ms)
+  ✔ quote/code fences & open blocks kept (0.5071ms)
+  ✔ HR and page break kept (0.5667ms)
+✔ Blocks & fences (2.9721ms)
+▶ Structural lines
+  ✔ anchors, conditionals, includes, block macros, block titles/attrs (0.732ms)
+✔ Structural lines (1.029ms)
+▶ Comments (critical)
+  ✔ line comments // pass-through (0.718ms)
+  ✔ block comments //// ... //// kept verbatim (0.5933ms)
+✔ Comments (critical) (1.7401ms)
+▶ False-positive list guard
+  ✔ Uppercase initial "M." in a name is NOT a lettered list (1.1214ms)
+✔ False-positive list guard (1.3893ms)
+ℹ tests 19
+ℹ suites 7
+ℹ pass 19
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 210.2324
+
+> adoc-reflow-min@0.0.2 test:corpus
+> node test/corpus.test.js
+
+▶ Golden corpus
+  ✖ paragraphs (26.04ms)
+  ✖ lists (32.4881ms)
+  ✖ admonitions (7.6205ms)
+  ✔ blocks (2.7116ms)
+  ✔ structure (24.4184ms)
+  ✔ comments (13.8148ms)
+  ✖ checklist (27.8312ms)
+  ✔ admon-blocks (10.7984ms)
+  ✔ source-blocks (9.2006ms)
+✖ Golden corpus (157.3655ms)
+ℹ tests 9
+ℹ suites 1
+ℹ pass 5
+ℹ fail 4
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 166.0532
+
+✖ failing tests:
+
+test at test\corpus.test.js:35:5
+✖ paragraphs (26.04ms)
+  Error: Mismatch in 'paragraphs' at line 1
+  got : "We do not always use precisely this phrase. In some cases, “the process"
+  want: "We do not always use precisely this phrase. In some cases, “the process of transmitting"
+      at TestContext.<anonymous> (C:\Users_home\aigum\git\_node\adoc-reflow-min\test\corpus.test.js:44:15)
+      at Test.runInAsyncScope (node:async_hooks:214:14)
+      at Test.run (node:internal/test_runner/test:1106:25)
+      at Test.start (node:internal/test_runner/test:1003:17)
+      at node:internal/test_runner/test:1514:71
+      at node:internal/per_context/primordials:464:82
+      at new Promise (<anonymous>)
+      at new SafePromise (node:internal/per_context/primordials:433:3)
+      at node:internal/per_context/primordials:464:9
+      at Array.map (<anonymous>)
+
+test at test\corpus.test.js:35:5
+✖ lists (32.4881ms)
+  Error: Mismatch in 'lists' at line 1
+  got : "* This is a long list item that must wrap with a proper hanging indent"
+  want: "* This is a long list item that must wrap with a proper hanging indent under the bullet"
+      at TestContext.<anonymous> (C:\Users_home\aigum\git\_node\adoc-reflow-min\test\corpus.test.js:44:15)
+      at Test.runInAsyncScope (node:async_hooks:214:14)
+      at Test.run (node:internal/test_runner/test:1106:25)
+      at Suite.processPendingSubtests (node:internal/test_runner/test:788:18)
+      at Test.postRun (node:internal/test_runner/test:1235:19)
+      at Test.run (node:internal/test_runner/test:1163:12)
+      at async Promise.all (index 0)
+      at async Suite.run (node:internal/test_runner/test:1516:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:358:3)
+
+test at test\corpus.test.js:35:5
+✖ admonitions (7.6205ms)
+  Error: Mismatch in 'admonitions' at line 1
+  got : "NOTE: This is a long admonition message that should wrap with a hanging"
+  want: "NOTE: This is a long admonition message that should wrap with a hanging indent and preserve"
+      at TestContext.<anonymous> (C:\Users_home\aigum\git\_node\adoc-reflow-min\test\corpus.test.js:44:15)
+      at Test.runInAsyncScope (node:async_hooks:214:14)
+      at Test.run (node:internal/test_runner/test:1106:25)
+      at Suite.processPendingSubtests (node:internal/test_runner/test:788:18)
+      at Test.postRun (node:internal/test_runner/test:1235:19)
+      at Test.run (node:internal/test_runner/test:1163:12)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7)
+
+test at test\corpus.test.js:35:5
+✖ checklist (27.8312ms)
+  Error: Mismatch in 'checklist' at line 1
+  got : "* [ ] A todo that should wrap with a hanging indent after the"
+  want: "* [ ] A todo that should wrap with a hanging indent after the checklist marker and be"
+      at TestContext.<anonymous> (C:\Users_home\aigum\git\_node\adoc-reflow-min\test\corpus.test.js:44:15)
+      at Test.runInAsyncScope (node:async_hooks:214:14)
+      at Test.run (node:internal/test_runner/test:1106:25)
+      at Suite.processPendingSubtests (node:internal/test_runner/test:788:18)
+      at Test.postRun (node:internal/test_runner/test:1235:19)
+      at Test.run (node:internal/test_runner/test:1163:12)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7)
